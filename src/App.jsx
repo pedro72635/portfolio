@@ -1,28 +1,20 @@
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './components/About';
-import Projects from './components/Projects';
 import Skills from './components/Skills';
+import Projects from './components/Projects';
 import Contact from './components/Contact';
 import Footer from './components/Footer';
 
-const Divider = () => (
-  <div className="h-px w-full bg-gradient-to-r from-transparent via-gray-700 to-transparent opacity-50 my-8" />
-);
-
 function App() {
   return (
-    <div className="bg-dark min-h-screen flex flex-col">
+    <div style={{ backgroundColor: 'var(--bg)', minHeight: '100vh' }}>
       <Navbar />
-      <main className="flex-grow">
+      <main>
         <Hero />
-        <Divider />
         <About />
-        <Divider />
-        <Projects />
-        <Divider />
         <Skills />
-        <Divider />
+        <Projects />
         <Contact />
       </main>
       <Footer />

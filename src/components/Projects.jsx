@@ -1,95 +1,267 @@
-import { ExternalLink, Star } from 'lucide-react';
+import { useEffect, useRef } from 'react';
+import { ExternalLink } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 
 const projects = [
   {
     title: 'RAG con AnythingLLM',
-    description: 'Implementación de un sistema RAG (Retrieval-Augmented Generation) utilizando AnythingLLM y LM Studio.',
-    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&h=500&fit=crop',
+    description: 'Sistema RAG (Retrieval-Augmented Generation) con AnythingLLM y LM Studio para consultar documentos privados con modelos de lenguaje locales.',
     github: 'https://github.com/pedro72635/RAG-anythingLLM',
+    image: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=700&h=420&fit=crop&q=80',
+    tags: ['AnythingLLM', 'LM Studio', 'RAG', 'IA'],
+    color: '#7c3aed',
+    category: 'IA',
   },
   {
     title: 'Modelos de Machine Learning',
-    description: 'Ejercicios y proyectos implementando algoritmos de clasificación, regresión y redes neuronales profundas.',
-    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=800&h=500&fit=crop',
+    description: 'Colección de implementaciones de algoritmos de clasificación, regresión y redes neuronales profundas usando Scikit-learn y Python.',
     github: 'https://github.com/pedro72635/ejercicios_machine_learning',
+    image: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?w=700&h=420&fit=crop&q=80',
+    tags: ['Python', 'Scikit-learn', 'Deep Learning', 'AI'],
+    color: '#9f67ff',
+    category: 'ML',
   },
   {
     title: 'Algoritmos Genéticos',
-    description: 'Implementación de algoritmos heurísticos inspirados en la evolución natural para problemas de optimización.',
-    image: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=800&h=500&fit=crop',
+    description: 'Implementación de algoritmos heurísticos inspirados en la evolución natural para resolver problemas complejos de optimización combinatoria.',
     github: 'https://github.com/pedro72635/algortimo_geneticos',
+    image: 'https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=700&h=420&fit=crop&q=80',
+    tags: ['Python', 'Algoritmos Genéticos', 'Optimización'],
+    color: '#06b6d4',
+    category: 'IA',
   },
   {
     title: 'Pipeline ETL Completo',
-    description: 'Diseño e implementación de un flujo de extracción, transformación y carga (ETL) para procesamiento de grandes volúmenes de datos.',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=500&fit=crop',
+    description: 'Diseño e implementación de un flujo ETL para procesamiento de grandes volúmenes de datos con Apache Spark y HDFS.',
     github: 'https://github.com/pedro72635/books-pipeline',
+    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=420&fit=crop&q=80',
+    tags: ['ETL', 'Apache Spark', 'Pandas', 'Big Data'],
+    color: '#f59e0b',
+    category: 'Data',
   },
   {
-    title: 'Servidor MCP IoT con Node-RED',
-    description: 'Integración de un servidor Model Context Protocol (MCP) para control de dispositivos IoT utilizando Node-RED.',
-    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&h=500&fit=crop',
+    title: 'Servidor MCP IoT & Node-RED',
+    description: 'Integración de un servidor Model Context Protocol (MCP) para control de dispositivos IoT y domótica avanzada con Node-RED.',
     github: 'https://github.com/pedro72635/iot_nodered',
+    image: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=700&h=420&fit=crop&q=80',
+    tags: ['Node-RED', 'IoT', 'MCP', 'Automatización'],
+    color: '#10b981',
+    category: 'IoT',
   },
 ];
 
 const ProjectCard = ({ project }) => (
-  <div className="group flex flex-col h-full rounded-2xl overflow-hidden bg-dark-light/50 border border-gray-800 hover:border-primary/50 transition-all duration-300 hover:-translate-y-2 hover:shadow-lg hover:shadow-primary/10">
-    <div className="relative overflow-hidden aspect-video">
+  <div
+    className="glass"
+    style={{
+      overflow: 'hidden',
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      borderRadius: '1.25rem',
+    }}
+  >
+    {/* Image */}
+    <div style={{ position: 'relative', aspectRatio: '16/9', overflow: 'hidden', flexShrink: 0 }}>
       <img
         src={project.image}
         alt={project.title}
-        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500 opacity-80 group-hover:opacity-100"
+        loading="lazy"
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          transition: 'transform 0.5s ease',
+        }}
+        onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.06)'}
+        onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent opacity-80 group-hover:opacity-60 transition-opacity duration-300" />
-      <div className="absolute bottom-4 left-4 right-4 flex gap-3 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-4 group-hover:translate-y-0">
-        <a
-          href={project.github}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex items-center gap-2 px-4 py-2 bg-dark/90 rounded-full text-white hover:bg-primary transition-colors text-sm font-medium shadow-lg hover:shadow-primary/30"
-        >
-          <SiGithub size={16} /> Ver Código
-        </a>
-      </div>
+      <div style={{
+        position: 'absolute',
+        inset: 0,
+        background: 'linear-gradient(to top, rgba(5,7,20,0.95) 0%, rgba(5,7,20,0.3) 60%, transparent 100%)',
+      }} />
+      {/* Category badge */}
+      <span style={{
+        position: 'absolute',
+        top: '0.75rem',
+        left: '0.75rem',
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '0.65rem',
+        fontWeight: 700,
+        letterSpacing: '0.1em',
+        textTransform: 'uppercase',
+        color: project.color,
+        background: `${project.color}18`,
+        border: `1px solid ${project.color}40`,
+        padding: '0.25rem 0.625rem',
+        borderRadius: '99px',
+        backdropFilter: 'blur(10px)',
+        WebkitBackdropFilter: 'blur(10px)',
+      }}>
+        {project.category}
+      </span>
     </div>
-    <div className="p-6 flex-1 flex flex-col items-center text-center">
-      <div className="flex items-center justify-center gap-2 mb-3">
-        <Star className="text-secondary" size={16} />
-        <span className="text-sm font-medium text-secondary">
-          Proyecto Académico
-        </span>
+
+    {/* Body */}
+    <div style={{
+      padding: '1.25rem 1.4rem 1.4rem',
+      display: 'flex',
+      flexDirection: 'column',
+      gap: '0.75rem',
+      flex: 1,
+    }}>
+      {/* Title */}
+      <h3 style={{
+        fontFamily: "'Syne', sans-serif",
+        fontSize: '1rem',
+        fontWeight: 700,
+        color: '#fff',
+        lineHeight: 1.25,
+      }}>
+        {project.title}
+      </h3>
+
+      {/* Description */}
+      <p style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '0.82rem',
+        color: 'var(--text-secondary)',
+        lineHeight: 1.7,
+        flex: 1,
+      }}>
+        {project.description}
+      </p>
+
+      {/* Tags */}
+      <div style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        gap: '0.4rem',
+        paddingTop: '0.75rem',
+        borderTop: '1px solid rgba(255,255,255,0.06)',
+      }}>
+        {project.tags.map(tag => (
+          <span key={tag} className="tag">{tag}</span>
+        ))}
       </div>
-      <h3 className="text-xl font-bold mb-2 text-white group-hover:text-primary transition-colors">{project.title}</h3>
-      <p className="text-gray-400 mb-2 text-sm leading-relaxed flex-1">{project.description}</p>
+
+      {/* GitHub button — always visible, well-spaced */}
+      <a
+        href={project.github}
+        target="_blank"
+        rel="noopener noreferrer"
+        style={{
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '0.5rem',
+          padding: '0.625rem 1rem',
+          borderRadius: '0.75rem',
+          background: `${project.color}14`,
+          border: `1px solid ${project.color}35`,
+          color: project.color,
+          fontFamily: "'Inter', sans-serif",
+          fontSize: '0.82rem',
+          fontWeight: 700,
+          textDecoration: 'none',
+          transition: 'background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease',
+          marginTop: '0.25rem',
+          whiteSpace: 'nowrap',
+        }}
+        onMouseEnter={e => {
+          e.currentTarget.style.background = `${project.color}28`;
+          e.currentTarget.style.boxShadow = `0 0 18px ${project.color}30`;
+          e.currentTarget.style.transform = 'translateY(-1px)';
+        }}
+        onMouseLeave={e => {
+          e.currentTarget.style.background = `${project.color}14`;
+          e.currentTarget.style.boxShadow = 'none';
+          e.currentTarget.style.transform = 'translateY(0)';
+        }}
+      >
+        <SiGithub size={15} style={{ flexShrink: 0 }} />
+        <span>Ver en GitHub</span>
+        <ExternalLink size={12} style={{ flexShrink: 0 }} />
+      </a>
     </div>
   </div>
 );
 
 const Projects = () => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => e.target.classList.toggle('visible', e.isIntersecting)),
+      { threshold: 0.1, rootMargin: '0px 0px -60px 0px' }
+    );
+    sectionRef.current?.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section id="projects" className="py-24 relative">
-      <div className="absolute top-0 right-0 w-96 h-96 bg-primary/10 rounded-full blur-[120px]" />
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-secondary/10 rounded-full blur-[120px]" />
-      
-      <div className="w-full px-4 sm:px-8 lg:px-16 2xl:px-24 relative">
-        <div className="text-center mb-16 flex flex-col items-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">
-            Mis <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Proyectos</span>
-          </h2>
-          <div className="w-full h-1 bg-gradient-to-r from-transparent via-primary to-transparent mx-auto rounded-full opacity-50" />
-          <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg text-center">
-            Una selección de mis trabajos académicos y desarrollos personales.
-          </p>
+    <section id="projects" className="section" ref={sectionRef}
+      style={{ background: 'linear-gradient(180deg, var(--bg-2) 0%, var(--bg) 100%)' }}
+    >
+      {/* Ambient */}
+      <div className="orb" style={{
+        width: 450, height: 450,
+        background: 'radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%)',
+        left: '-5%', bottom: '10%', filter: 'blur(80px)',
+      }} />
+      <div className="orb" style={{
+        width: 400, height: 400,
+        background: 'radial-gradient(circle, rgba(6,182,212,0.08) 0%, transparent 70%)',
+        right: '-5%', top: '20%', filter: 'blur(80px)',
+      }} />
+
+      <div className="container">
+        {/* Header */}
+        <div className="section-heading reveal">
+          <span className="section-label">Portfolio</span>
+          <h2>Mis <span className="gradient-text">Proyectos</span></h2>
+          <div className="divider" />
+          <p>Trabajos académicos y desarrollos personales en Inteligencia Artificial, Big Data e IoT.</p>
         </div>
 
-        <div className="flex flex-wrap justify-center gap-8">
-          {projects.map((project) => (
-            <div key={project.title} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)]">
+        {/* Projects grid */}
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+          gap: '1.5rem',
+          alignItems: 'start',
+        }}>
+          {projects.map((project, i) => (
+            <div
+              key={project.title}
+              className="reveal"
+              style={{
+                animationDelay: `${i * 0.1}s`,
+                height: '100%',
+              }}
+            >
               <ProjectCard project={project} />
             </div>
           ))}
+        </div>
+
+        {/* GitHub CTA */}
+        <div className="reveal" style={{
+          marginTop: '3rem',
+          textAlign: 'center',
+        }}>
+          <a
+            href="https://github.com/pedro72635"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            style={{ display: 'inline-flex' }}
+          >
+            <SiGithub size={17} style={{ flexShrink: 0 }} />
+            <span>Ver todos en GitHub</span>
+            <ExternalLink size={14} style={{ flexShrink: 0 }} />
+          </a>
         </div>
       </div>
     </section>

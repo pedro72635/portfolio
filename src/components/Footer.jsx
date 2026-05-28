@@ -1,28 +1,120 @@
-import { Mail, Heart } from 'lucide-react';
+import { ArrowUp } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const Footer = () => (
-  <footer className="py-4 border-t border-gray-800">
-    <div className="w-full px-4 sm:px-8 lg:px-16 2xl:px-24">
-      <div className="flex flex-col md:flex-row justify-between items-center gap-6">
-        <p className="text-gray-400 text-sm">
-           {new Date().getFullYear()} Pedro Galera. Todos los derechos reservados.
-        </p>
+const GITHUB_URL   = 'https://github.com/pedro72635';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/pedro-galera-fernandez-a5508936b/';
 
-        <div className="flex gap-4">
-          <a href="https://github.com/pedro72635" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-dark-light hover:bg-primary/20 text-gray-400 hover:text-primary transition-all">
-            <FaGithub size={20} />
-          </a>
-          <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="p-2 rounded-lg bg-dark-light hover:bg-primary/20 text-gray-400 hover:text-primary transition-all">
-            <FaLinkedin size={20} />
-          </a>
-          <a href="mailto:tu@email.com" className="p-2 rounded-lg bg-dark-light hover:bg-primary/20 text-gray-400 hover:text-primary transition-all">
-            <Mail size={20} />
-          </a>
+const Footer = () => {
+  const scrollTop = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  return (
+    <footer style={{
+      background: 'var(--bg-2)',
+      borderTop: '1px solid rgba(124,58,237,0.1)',
+      padding: '2.5rem 0',
+    }}>
+      <div className="container">
+        <div style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          gap: '1.25rem',
+        }}>
+          {/* Brand */}
+          <span style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 800,
+            fontSize: '1.2rem',
+            background: 'linear-gradient(135deg, #9f67ff, #06b6d4)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+          }}>
+            Pedro Galera
+          </span>
+
+          {/* Copyright */}
+          <p style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: '0.8rem',
+            color: 'var(--text-muted)',
+            textAlign: 'center',
+          }}>
+            © {new Date().getFullYear()} Pedro Galera Fernández · Diseñado con 💜
+          </p>
+
+          {/* Socials + scroll-top */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.625rem' }}>
+            {[
+              { href: GITHUB_URL,   Icon: FaGithub,  label: 'GitHub' },
+              { href: LINKEDIN_URL, Icon: FaLinkedin, label: 'LinkedIn' },
+            ].map(({ href, Icon, label }) => (
+              <a
+                key={label}
+                href={href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={label}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  width: 36, height: 36,
+                  borderRadius: '0.6rem',
+                  background: 'rgba(255,255,255,0.04)',
+                  border: '1px solid rgba(255,255,255,0.08)',
+                  color: 'var(--text-muted)',
+                  transition: 'all 0.2s ease',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={e => {
+                  e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)';
+                  e.currentTarget.style.color = '#fff';
+                  e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
+                }}
+                onMouseLeave={e => {
+                  e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
+                  e.currentTarget.style.color = 'var(--text-muted)';
+                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
+                }}
+              >
+                <Icon size={16} />
+              </a>
+            ))}
+
+            {/* Scroll top */}
+            <button
+              onClick={scrollTop}
+              aria-label="Volver arriba"
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                width: 36, height: 36,
+                borderRadius: '0.6rem',
+                background: 'rgba(124,58,237,0.1)',
+                border: '1px solid rgba(124,58,237,0.25)',
+                color: 'var(--primary-light)',
+                cursor: 'pointer',
+                transition: 'all 0.2s ease',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.background = 'rgba(124,58,237,0.2)';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
+            >
+              <ArrowUp size={16} />
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-);
+    </footer>
+  );
+};
 
 export default Footer;

@@ -1,95 +1,235 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Mail } from 'lucide-react';
-import { FaGithub, FaLinkedin } from 'react-icons/fa';
+import { Menu, X } from 'lucide-react';
 
-const navLinks = [
-  { name: 'Inicio', href: '#hero' },
-  { name: 'Sobre mí', href: '#about' },
-  { name: 'Proyectos', href: '#projects' },
-  { name: 'Habilidades', href: '#skills' },
-  { name: 'Contacto', href: '#contact' },
+const NAV_LINKS = [
+  { label: 'Inicio',     href: '#hero' },
+  { label: 'Sobre mí',  href: '#about' },
+  { label: 'Skills',    href: '#skills' },
+  { label: 'Proyectos', href: '#projects' },
+  { label: 'Contacto',  href: '#contact' },
 ];
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrolled,  setScrolled]  = useState(false);
+  const [menuOpen,  setMenuOpen]  = useState(false);
+  const [activeSection, setActive] = useState('hero');
 
+  /* — Scroll spy — */
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 40);
+      const sections = NAV_LINKS.map(l => l.href.slice(1));
+      for (let i = sections.length - 1; i >= 0; i--) {
+        const el = document.getElementById(sections[i]);
+        if (el && el.getBoundingClientRect().top <= 120) {
+          setActive(sections[i]);
+          break;
+        }
+      }
+    };
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  /* — Close mobile menu on resize — */
+  useEffect(() => {
+    const onResize = () => { if (window.innerWidth >= 768) setMenuOpen(false); };
+    window.addEventListener('resize', onResize);
+    return () => window.removeEventListener('resize', onResize);
+  }, []);
+
+  const handleLink = (href) => {
+    setMenuOpen(false);
+    document.querySelector(href)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      scrolled ? 'bg-dark/95 backdrop-blur-md shadow-lg shadow-primary/10' : 'bg-transparent'
-    }`}>
-      <div className="w-full px-4 sm:px-8 lg:px-16 2xl:px-24">
-        <div className="flex justify-between items-center h-20">
-          <div className="w-1/4 flex justify-start">
-            <a href="#hero" className="text-2xl font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent tracking-wide">
-              Portfolio
-            </a>
-          </div>
+    <header
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        zIndex: 100,
+        padding: scrolled ? '0.6rem 0' : '1rem 0',
+        background: scrolled
+          ? 'rgba(5,7,20,0.85)'
+          : 'transparent',
+        backdropFilter: scrolled ? 'blur(20px)' : 'none',
+        WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
+        borderBottom: scrolled ? '1px solid rgba(124,58,237,0.12)' : '1px solid transparent',
+        transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
+      }}
+    >
+      <div className="container" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        {/* Logo */}
+        <a
+          href="#hero"
+          onClick={e => { e.preventDefault(); handleLink('#hero'); }}
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 800,
+            fontSize: '1.3rem',
+            background: 'linear-gradient(135deg,#9f67ff,#06b6d4)',
+            WebkitBackgroundClip: 'text',
+            WebkitTextFillColor: 'transparent',
+            backgroundClip: 'text',
+            letterSpacing: '-0.02em',
+            flexShrink: 0,
+          }}
+        >
+          PG
+        </a>
 
-          <div className="hidden md:flex w-2/4 justify-center items-center gap-8 lg:gap-16">
-            {navLinks.map((link) => (
+        {/* Desktop nav */}
+        <nav style={{ display: 'flex', alignItems: 'center', gap: '0.25rem' }} className="desktop-nav">
+          {NAV_LINKS.map(({ label, href }) => {
+            const section = href.slice(1);
+            const isActive = activeSection === section;
+            return (
               <a
-                key={link.name}
-                href={link.href}
-                className="text-gray-300 hover:text-primary transition-colors duration-200 font-medium tracking-wide text-sm uppercase"
+                key={href}
+                href={href}
+                onClick={e => { e.preventDefault(); handleLink(href); }}
+                style={{
+                  position: 'relative',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.4rem',
+                  padding: '0.5rem 0.875rem',
+                  borderRadius: '0.625rem',
+                  fontFamily: "'Inter', sans-serif",
+                  fontSize: '0.85rem',
+                  fontWeight: isActive ? 700 : 500,
+                  color: isActive ? '#fff' : 'var(--text-secondary)',
+                  background: isActive ? 'rgba(124,58,237,0.15)' : 'transparent',
+                  transition: 'all 0.2s ease',
+                  whiteSpace: 'nowrap',
+                  textDecoration: 'none',
+                }}
+                onMouseEnter={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = '#fff';
+                    e.currentTarget.style.background = 'rgba(255,255,255,0.05)';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (!isActive) {
+                    e.currentTarget.style.color = 'var(--text-secondary)';
+                    e.currentTarget.style.background = 'transparent';
+                  }
+                }}
               >
-                {link.name}
+                {isActive && (
+                  <span style={{
+                    width: '5px', height: '5px',
+                    borderRadius: '50%',
+                    background: 'var(--primary-light)',
+                    flexShrink: 0,
+                    boxShadow: '0 0 8px var(--primary-light)',
+                  }} />
+                )}
+                {label}
               </a>
-            ))}
-          </div>
+            );
+          })}
+        </nav>
 
-          <div className="hidden md:flex w-1/4 justify-end items-center space-x-6">
-            <a href="https://github.com/pedro72635" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors hover:scale-110">
-              <FaGithub size={20} />
-            </a>
-            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors hover:scale-110">
-              <FaLinkedin size={20} />
-            </a>
-            <a href="#contact" className="text-gray-300 hover:text-primary transition-colors hover:scale-110">
-              <Mail size={20} />
-            </a>
-          </div>
+        {/* CTA desktop */}
+        <a
+          href="#contact"
+          onClick={e => { e.preventDefault(); handleLink('#contact'); }}
+          className="btn-primary desktop-cta"
+          style={{ padding: '0.6rem 1.4rem', fontSize: '0.82rem' }}
+        >
+          Contactar
+        </a>
 
-          <button onClick={() => setIsOpen(!isOpen)} className="md:hidden text-gray-300 flex justify-end w-3/4">
-            {isOpen ? <X size={28} /> : <Menu size={28} />}
-          </button>
-        </div>
+        {/* Hamburger */}
+        <button
+          onClick={() => setMenuOpen(v => !v)}
+          className="hamburger"
+          aria-label="Abrir menú"
+          style={{
+            display: 'none',
+            background: 'rgba(124,58,237,0.1)',
+            border: '1px solid rgba(124,58,237,0.2)',
+            borderRadius: '0.625rem',
+            padding: '0.5rem',
+            cursor: 'pointer',
+            color: '#fff',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          {menuOpen ? <X size={20} /> : <Menu size={20} />}
+        </button>
       </div>
 
-      {isOpen && (
-        <div className="md:hidden bg-dark-light/95 backdrop-blur-md">
-          <div className="px-4 py-4 space-y-3">
-            {navLinks.map((link) => (
+      {/* Mobile drawer */}
+      {menuOpen && (
+        <div style={{
+          position: 'absolute',
+          top: '100%',
+          left: 0,
+          right: 0,
+          background: 'rgba(5,7,20,0.97)',
+          backdropFilter: 'blur(24px)',
+          WebkitBackdropFilter: 'blur(24px)',
+          borderBottom: '1px solid rgba(124,58,237,0.15)',
+          padding: '1.25rem 1.5rem',
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '0.25rem',
+          animation: 'slide-up-sm 0.25s ease both',
+        }}>
+          {NAV_LINKS.map(({ label, href }) => {
+            const isActive = activeSection === href.slice(1);
+            return (
               <a
-                key={link.name}
-                href={link.href}
-                onClick={() => setIsOpen(false)}
-                className="block text-gray-300 hover:text-primary transition-colors font-medium"
+                key={href}
+                href={href}
+                onClick={e => { e.preventDefault(); handleLink(href); }}
+                style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '0.5rem',
+                  padding: '0.75rem 1rem',
+                  borderRadius: '0.75rem',
+                  fontFamily: "'Inter', sans-serif",
+                  fontWeight: isActive ? 700 : 500,
+                  fontSize: '0.95rem',
+                  color: isActive ? '#fff' : 'var(--text-secondary)',
+                  background: isActive ? 'rgba(124,58,237,0.12)' : 'transparent',
+                  textDecoration: 'none',
+                }}
               >
-                {link.name}
+                {isActive && (
+                  <span style={{ width: 6, height: 6, borderRadius: '50%', background: 'var(--primary-light)', flexShrink: 0 }} />
+                )}
+                {label}
               </a>
-            ))}
-            <div className="flex space-x-6 pt-4 border-t border-gray-700">
-              <a href="https://github.com/pedro72635" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary">
-                <FaGithub size={24} />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary">
-                <FaLinkedin size={24} />
-              </a>
-              <a href="#contact" className="text-gray-300 hover:text-primary">
-                <Mail size={20} />
-              </a>
-            </div>
-          </div>
+            );
+          })}
+          <a
+            href="#contact"
+            onClick={e => { e.preventDefault(); handleLink('#contact'); }}
+            className="btn-primary"
+            style={{ marginTop: '0.75rem', justifyContent: 'center' }}
+          >
+            Contactar
+          </a>
         </div>
       )}
-    </nav>
+
+      <style>{`
+        @media (max-width: 767px) {
+          .desktop-nav  { display: none !important; }
+          .desktop-cta  { display: none !important; }
+          .hamburger    { display: flex !important; }
+        }
+      `}</style>
+    </header>
   );
 };
 

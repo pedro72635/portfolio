@@ -1,80 +1,267 @@
 import { ArrowDown, FileText, Send } from 'lucide-react';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 
-const Hero = () => {
-  return (
-    <section id="hero" className="min-h-screen flex items-center justify-center relative overflow-hidden pt-16">
-      {/* Background Gradients */}
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-dark to-secondary/20 animate-gradient" />
-      
-      {/* Floating orbs */}
-      <div className="absolute top-20 left-10 w-72 h-72 bg-primary/30 rounded-full blur-[100px] animate-float" />
-      <div className="absolute bottom-20 right-10 w-96 h-96 bg-secondary/20 rounded-full blur-[100px] animate-float" style={{ animationDelay: '2s' }} />
-      <div className="absolute top-1/2 left-1/2 w-64 h-64 bg-accent/10 rounded-full blur-[80px] animate-float" style={{ animationDelay: '4s' }} />
+const GITHUB_URL   = 'https://github.com/pedro72635';
+const LINKEDIN_URL = 'https://www.linkedin.com/in/pedro-galera-fernandez-a5508936b/';
 
-      <div className="relative z-10 text-center px-4 max-w-4xl mx-auto mt-10">
-        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-green-500/10 border border-green-500/20 mb-6 backdrop-blur-sm">
-          <span className="relative flex h-3 w-3">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-500 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-3 w-3 bg-green-500"></span>
+const Hero = () => (
+  <section
+    id="hero"
+    style={{
+      position: 'relative',
+      minHeight: '100svh',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      overflow: 'hidden',
+      paddingTop: '6rem',
+      paddingBottom: '5rem',
+    }}
+  >
+    {/* ── Ambient orbs ── */}
+    <div className="orb animate-float" style={{
+      width: 480, height: 480,
+      background: 'radial-gradient(circle, rgba(124,58,237,0.28) 0%, transparent 70%)',
+      top: '-8%', left: '-10%',
+    }} />
+    <div className="orb animate-float-delayed" style={{
+      width: 560, height: 560,
+      background: 'radial-gradient(circle, rgba(6,182,212,0.18) 0%, transparent 70%)',
+      bottom: '-10%', right: '-12%',
+    }} />
+    <div className="orb animate-float" style={{
+      width: 300, height: 300,
+      background: 'radial-gradient(circle, rgba(245,158,11,0.1) 0%, transparent 70%)',
+      top: '40%', left: '60%',
+      animationDelay: '3s',
+    }} />
+
+    {/* ── Grid overlay ── */}
+    <div style={{
+      position: 'absolute', inset: 0, zIndex: 0,
+      backgroundImage: `
+        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px)
+      `,
+      backgroundSize: '60px 60px',
+      maskImage: 'radial-gradient(ellipse 80% 70% at 50% 50%, black 30%, transparent 100%)',
+    }} />
+
+    {/* ── Content ── */}
+    <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+      <div style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        textAlign: 'center',
+        gap: '0',
+      }}>
+
+        {/* — Availability badge — */}
+        <div
+          className="animate-slide-up anim-delay-1"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+            gap: '0.6rem',
+            padding: '0.4rem 1.1rem',
+            borderRadius: '99px',
+            background: 'rgba(16,185,129,0.08)',
+            border: '1px solid rgba(16,185,129,0.22)',
+            marginBottom: '2rem',
+          }}
+        >
+          <span style={{ position: 'relative', display: 'flex', width: 9, height: 9, flexShrink: 0 }}>
+            <span className="animate-ping-slow" style={{
+              position: 'absolute', inset: 0,
+              borderRadius: '50%',
+              background: '#10b981',
+              opacity: 0.5,
+            }} />
+            <span style={{
+              position: 'relative',
+              width: 9, height: 9,
+              borderRadius: '50%',
+              background: '#10b981',
+              flexShrink: 0,
+            }} />
           </span>
-          <span className="text-green-500 font-medium tracking-wide text-sm md:text-base">Disponible para trabajar</span>
+          <span style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: '0.72rem',
+            fontWeight: 700,
+            letterSpacing: '0.12em',
+            textTransform: 'uppercase',
+            color: '#10b981',
+          }}>
+            Disponible para trabajar
+          </span>
         </div>
 
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 tracking-tight">
+        {/* — Main heading — */}
+        <h1
+          className="animate-slide-up anim-delay-2"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(2.6rem, 8vw, 5.8rem)',
+            lineHeight: 1.2,
+            letterSpacing: '-0.01em',
+            color: '#fff',
+            marginBottom: '1.25rem',
+          }}
+        >
           Hola, soy{' '}
-          <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient inline-block">
-            Pedro Galera
-          </span>
+          <span className="gradient-text animate-gradient">Pedro Galera</span>
         </h1>
 
-        <div className="mb-8 space-y-4">
-          <p className="text-xl md:text-2xl text-gray-300 max-w-2xl mx-auto font-light leading-relaxed">
-            Técnico en <strong className="text-white font-semibold">Desarrollo Multiplataforma (DAM)</strong> y Máster en <strong className="text-white font-semibold">Big Data & Inteligencia Artificial</strong>.
-          </p>
-          
-          <p className="text-lg md:text-xl text-secondary/90 max-w-2xl mx-auto italic font-medium">
-            "Solucionando problemas del pasado y del futuro."
-          </p>
+        {/* — Role subtitle — */}
+        <p
+          className="animate-slide-up anim-delay-3"
+          style={{
+            fontFamily: "'Inter', sans-serif",
+            fontSize: 'clamp(1rem, 2.5vw, 1.25rem)',
+            fontWeight: 400,
+            color: 'var(--text-secondary)',
+            lineHeight: 1.7,
+            maxWidth: '640px',
+            marginBottom: '2.5rem',
+          }}
+        >
+          Técnico en{' '}
+          <strong style={{ color: '#fff', fontWeight: 600 }}>Desarrollo Multiplataforma</strong>
+          {' '}y Máster en{' '}
+          <strong style={{ color: '#fff', fontWeight: 600 }}>Big Data &amp; Inteligencia Artificial</strong>.
+          <br />
+          <span style={{
+            display: 'inline-block',
+            marginTop: '0.5rem',
+            fontSize: 'clamp(0.85rem, 2vw, 1rem)',
+            fontStyle: 'italic',
+            color: 'var(--primary-light)',
+          }}>
+            "Transformando datos en conocimiento y retos en soluciones digitales."
+          </span>
+        </p>
+
+        {/* — CTA buttons — */}
+        <div
+          className="animate-slide-up anim-delay-4"
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            gap: '1rem',
+            justifyContent: 'center',
+            alignItems: 'center',
+            marginBottom: '3rem',
+          }}
+        >
+          <a href="#contact" className="btn-primary" style={{ minWidth: '160px' }}>
+            <Send size={16} style={{ flexShrink: 0 }} />
+            <span>Hablemos ahora</span>
+          </a>
+          <a
+            href="/cv.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-secondary"
+            style={{ minWidth: '160px' }}
+          >
+            <FileText size={16} style={{ flexShrink: 0, color: 'var(--primary-light)' }} />
+            <span>Ver Currículum</span>
+          </a>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-8 sm:gap-16 justify-center items-center mt-20">
-          <div className="flex flex-col items-center gap-12 w-full sm:w-64">
+        {/* — Social links — */}
+        <div
+          className="animate-slide-up anim-delay-5"
+          style={{
+            display: 'flex',
+            gap: '0.75rem',
+            alignItems: 'center',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          {[
+            { href: GITHUB_URL,   Icon: FaGithub,   label: 'GitHub',   color: '#fff' },
+            { href: LINKEDIN_URL, Icon: FaLinkedin,  label: 'LinkedIn', color: '#06b6d4' },
+          ].map(({ href, Icon, label, color }) => (
             <a
-              href="#contact"
-              className="group w-full py-4 bg-gradient-to-r from-primary to-secondary rounded-full font-semibold text-white shadow-lg shadow-primary/20 hover:shadow-primary/40 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2"
-            >
-              <span>Contactar</span>
-              <Send size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </a>
-            <a href="https://github.com/pedro72635" target="_blank" rel="noopener noreferrer" className="p-6 rounded-full bg-dark-light/50 border border-gray-700 hover:border-primary hover:text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]">
-              <FaGithub size={32} />
-            </a>
-          </div>
-
-          <div className="flex flex-col items-center gap-12 w-full sm:w-64">
-            <a
-              href="/cv.pdf"
+              key={label}
+              href={href}
               target="_blank"
               rel="noopener noreferrer"
-              className="group w-full py-4 border-2 border-primary/50 rounded-full font-semibold text-primary hover:bg-primary/10 transition-all duration-300 hover:-translate-y-1 flex items-center justify-center gap-2"
+              style={{
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: '0.5rem',
+                padding: '0.6rem 1.1rem',
+                borderRadius: '0.75rem',
+                background: 'rgba(255,255,255,0.04)',
+                border: '1px solid rgba(255,255,255,0.1)',
+                color: 'var(--text-secondary)',
+                fontFamily: "'Inter', sans-serif",
+                fontSize: '0.82rem',
+                fontWeight: 600,
+                transition: 'all 0.25s ease',
+                textDecoration: 'none',
+                whiteSpace: 'nowrap',
+              }}
+              onMouseEnter={e => {
+                e.currentTarget.style.borderColor = 'rgba(124,58,237,0.5)';
+                e.currentTarget.style.color = '#fff';
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 0 20px rgba(124,58,237,0.15)';
+              }}
+              onMouseLeave={e => {
+                e.currentTarget.style.borderColor = 'rgba(255,255,255,0.1)';
+                e.currentTarget.style.color = 'var(--text-secondary)';
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
-              <FileText size={20} className="group-hover:scale-110 transition-transform" />
-              <span>Ver Curriculum</span>
+              <Icon size={17} style={{ color, flexShrink: 0 }} />
+              <span>{label}</span>
             </a>
-            <a href="https://www.linkedin.com/in/pedro-galera-fernandez-a5508936b/" target="_blank" rel="noopener noreferrer" className="p-6 rounded-full bg-dark-light/50 border border-gray-700 hover:border-primary hover:text-primary transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(139,92,246,0.4)]">
-              <FaLinkedin size={32} />
-            </a>
-          </div>
+          ))}
         </div>
-
-        <a href="#about" className="absolute bottom-10 left-1/2 -translate-x-1/2 animate-bounce text-gray-400 hover:text-primary transition-colors">
-          <ArrowDown size={28} />
-        </a>
       </div>
-    </section>
-  );
-};
+    </div>
+
+    {/* ── Scroll indicator ── */}
+    <a
+      href="#about"
+      aria-label="Bajar"
+      style={{
+        position: 'absolute',
+        bottom: '2rem',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '0.35rem',
+        color: 'var(--text-muted)',
+        transition: 'color 0.2s ease',
+        zIndex: 5,
+        textDecoration: 'none',
+      }}
+      onMouseEnter={e => e.currentTarget.style.color = 'var(--primary-light)'}
+      onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}
+    >
+      <span style={{
+        fontFamily: "'Inter', sans-serif",
+        fontSize: '0.65rem',
+        letterSpacing: '0.15em',
+        textTransform: 'uppercase',
+        fontWeight: 600,
+      }}>
+        Scroll
+      </span>
+      <ArrowDown size={16} style={{ animation: 'float 2s ease-in-out infinite' }} />
+    </a>
+  </section>
+);
 
 export default Hero;
-
