@@ -10,7 +10,7 @@ const Footer = () => {
   return (
     <footer style={{
       background: 'var(--bg-2)',
-      borderTop: '1px solid rgba(124,58,237,0.1)',
+      borderTop: '1px solid rgba(13,148,136,0.12)',
       padding: '2.5rem 0',
     }}>
       <div className="container">
@@ -26,10 +26,7 @@ const Footer = () => {
             fontFamily: "'Syne', sans-serif",
             fontWeight: 800,
             fontSize: '1.2rem',
-            background: 'linear-gradient(135deg, #9f67ff, #06b6d4)',
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
+            color: 'var(--primary-light)',
           }}>
             Pedro Galera
           </span>
@@ -41,7 +38,7 @@ const Footer = () => {
             color: 'var(--text-muted)',
             textAlign: 'center',
           }}>
-            © {new Date().getFullYear()} Pedro Galera Fernández · Diseñado con 💜
+            © {new Date().getFullYear()} Pedro Galera Fernández
           </p>
 
           {/* Socials + scroll-top */}
@@ -69,9 +66,9 @@ const Footer = () => {
                   textDecoration: 'none',
                 }}
                 onMouseEnter={e => {
-                  e.currentTarget.style.borderColor = 'rgba(124,58,237,0.4)';
+                  e.currentTarget.style.borderColor = 'rgba(13,148,136,0.45)';
                   e.currentTarget.style.color = '#fff';
-                  e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
+                  e.currentTarget.style.background = 'rgba(13,148,136,0.12)';
                 }}
                 onMouseLeave={e => {
                   e.currentTarget.style.borderColor = 'rgba(255,255,255,0.08)';
@@ -93,18 +90,18 @@ const Footer = () => {
                 justifyContent: 'center',
                 width: 36, height: 36,
                 borderRadius: '0.6rem',
-                background: 'rgba(124,58,237,0.1)',
-                border: '1px solid rgba(124,58,237,0.25)',
+                background: 'rgba(13,148,136,0.10)',
+                border: '1px solid rgba(13,148,136,0.28)',
                 color: 'var(--primary-light)',
                 cursor: 'pointer',
                 transition: 'all 0.2s ease',
               }}
               onMouseEnter={e => {
-                e.currentTarget.style.background = 'rgba(124,58,237,0.2)';
+                e.currentTarget.style.background = 'rgba(13,148,136,0.20)';
                 e.currentTarget.style.transform = 'translateY(-2px)';
               }}
               onMouseLeave={e => {
-                e.currentTarget.style.background = 'rgba(124,58,237,0.1)';
+                e.currentTarget.style.background = 'rgba(13,148,136,0.10)';
                 e.currentTarget.style.transform = 'translateY(0)';
               }}
             >
