@@ -4,6 +4,15 @@ import { SiGithub } from 'react-icons/si';
 
 const projects = [
   {
+    title: 'Agente RPA con LangGraph y RAG',
+    description: 'Agente autónomo de automatización robótica (RPA) que razona en lenguaje natural, recupera procedimientos via RAG (ChromaDB) y los ejecuta en el navegador con Playwright. Incluye Human-in-the-loop, persistencia SQLite y API FastAPI con logs en tiempo real.',
+    github: 'https://github.com/pedro72635/langchain-rpa-agent',
+    image: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=700&h=420&fit=crop&q=80',
+    tags: ['LangGraph', 'LangChain', 'RAG', 'Playwright', 'FastAPI', 'Python'],
+    color: '#a855f7',
+    category: 'IA',
+  },
+  {
     title: 'RAG con AnythingLLM',
     description: 'Sistema RAG (Retrieval-Augmented Generation) con AnythingLLM y LM Studio para consultar documentos privados con modelos de lenguaje locales.',
     github: 'https://github.com/pedro72635/RAG-anythingLLM',
