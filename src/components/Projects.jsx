@@ -31,6 +31,15 @@ const projects = [
     category: 'ML',
   },
   {
+    title: 'Ejercicios de Deep Learning',
+    description: 'Resolución de problemas prácticos y desarrollo de arquitecturas de redes neuronales, visión artificial (CNN) y procesamiento de lenguaje natural.',
+    github: 'https://github.com/pedro72635/deep-learning-ejercicios',
+    image: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=700&h=420&fit=crop&q=80',
+    tags: ['Deep Learning', 'PyTorch', 'TensorFlow', 'Neural Networks', 'Python'],
+    color: '#ec4899',
+    category: 'IA',
+  },
+  {
     title: 'Algoritmos Genéticos',
     description: 'Implementación de algoritmos heurísticos inspirados en la evolución natural para resolver problemas complejos de optimización combinatoria.',
     github: 'https://github.com/pedro72635/algortimo_geneticos',
@@ -40,13 +49,31 @@ const projects = [
     category: 'IA',
   },
   {
-    title: 'Pipeline ETL Completo',
-    description: 'Diseño e implementación de un flujo ETL para procesamiento de grandes volúmenes de datos con Apache Spark y HDFS.',
-    github: 'https://github.com/pedro72635/books-pipeline',
-    image: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=700&h=420&fit=crop&q=80',
-    tags: ['ETL', 'Apache Spark', 'Pandas', 'Big Data'],
+    title: 'Pipeline IoT Medallion',
+    description: 'Flujo de datos IoT utilizando arquitectura Medallion (capas Bronze, Silver y Gold) para procesar, limpiar y analizar eventos en tiempo real.',
+    github: 'https://github.com/pedro72635/iot-medallion-pipeline',
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=700&h=420&fit=crop&q=80',
+    tags: ['Spark', 'Delta Lake', 'IoT', 'Medallion', 'Data Engineering'],
     color: '#f59e0b',
     category: 'Data',
+  },
+  {
+    title: 'Traductor en Vivo con Azure',
+    description: 'Traducción de texto y voz en tiempo real utilizando la API y servicios cognitivos en la nube de Azure AI Translator.',
+    github: 'https://github.com/pedro72635/traductor-live-azure',
+    image: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=700&h=420&fit=crop&q=80',
+    tags: ['Azure AI', 'APIs', 'Cloud Services', 'Real-time'],
+    color: '#3b82f6',
+    category: 'Cloud',
+  },
+  {
+    title: 'Sistemas Expertos',
+    description: 'Desarrollo de motores de reglas de inferencia y bases de conocimiento lógicas aplicados a la toma de decisiones automatizada.',
+    github: 'https://github.com/pedro72635/sistemas_expertos',
+    image: 'https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=700&h=420&fit=crop&q=80',
+    tags: ['Sistemas Expertos', 'Python', 'IA Clásica', 'Lógica'],
+    color: '#84cc16',
+    category: 'IA',
   },
   {
     title: 'Servidor MCP IoT & Node-RED',
@@ -58,6 +85,7 @@ const projects = [
     category: 'IoT',
   },
 ];
+
 
 const ProjectCard = ({ project }) => (
   <div
