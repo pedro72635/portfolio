@@ -57,7 +57,7 @@ const Navbar = () => {
           : 'transparent',
         backdropFilter: scrolled ? 'blur(20px)' : 'none',
         WebkitBackdropFilter: scrolled ? 'blur(20px)' : 'none',
-        borderBottom: scrolled ? '1px solid rgba(124,58,237,0.12)' : '1px solid transparent',
+        borderBottom: scrolled ? '1px solid rgba(13,148,136,0.18)' : '1px solid transparent',
         transition: 'all 0.4s cubic-bezier(0.16,1,0.3,1)',
       }}
     >
@@ -102,7 +102,7 @@ const Navbar = () => {
                   fontSize: '0.85rem',
                   fontWeight: isActive ? 700 : 500,
                   color: isActive ? '#fff' : 'var(--text-secondary)',
-                  background: isActive ? 'rgba(124,58,237,0.15)' : 'transparent',
+                  background: isActive ? 'rgba(13,148,136,0.18)' : 'transparent',
                   transition: 'all 0.2s ease',
                   whiteSpace: 'nowrap',
                   textDecoration: 'none',
@@ -152,8 +152,8 @@ const Navbar = () => {
           aria-label="Abrir menú"
           style={{
             display: 'none',
-            background: 'rgba(124,58,237,0.1)',
-            border: '1px solid rgba(124,58,237,0.2)',
+            background: 'rgba(13,148,136,0.12)',
+            border: '1px solid rgba(13,148,136,0.25)',
             borderRadius: '0.625rem',
             padding: '0.5rem',
             cursor: 'pointer',
@@ -176,7 +176,7 @@ const Navbar = () => {
           background: 'rgba(5,7,20,0.97)',
           backdropFilter: 'blur(24px)',
           WebkitBackdropFilter: 'blur(24px)',
-          borderBottom: '1px solid rgba(124,58,237,0.15)',
+          borderBottom: '1px solid rgba(13,148,136,0.18)',
           padding: '1.25rem 1.5rem',
           display: 'flex',
           flexDirection: 'column',
@@ -200,7 +200,7 @@ const Navbar = () => {
                   fontWeight: isActive ? 700 : 500,
                   fontSize: '0.95rem',
                   color: isActive ? '#fff' : 'var(--text-secondary)',
-                  background: isActive ? 'rgba(124,58,237,0.12)' : 'transparent',
+                  background: isActive ? 'rgba(13,148,136,0.15)' : 'transparent',
                   textDecoration: 'none',
                 }}
               >

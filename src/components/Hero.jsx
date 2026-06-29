@@ -4,7 +4,7 @@ import { FaGithub, FaLinkedin } from 'react-icons/fa';
 const GITHUB_URL   = 'https://github.com/pedro72635';
 const LINKEDIN_URL = 'https://www.linkedin.com/in/pedro-galera-fernandez-a5508936b/';
 
-const Hero = () => (
+const Hero = ({ onOpenResume }) => (
   <section
     id="hero"
     style={{
@@ -160,16 +160,14 @@ const Hero = () => (
             <Send size={16} style={{ flexShrink: 0 }} />
             <span>Hablemos ahora</span>
           </a>
-          <a
-            href="/cv.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
+          <button
+            onClick={onOpenResume}
             className="btn-secondary"
-            style={{ minWidth: '160px' }}
+            style={{ minWidth: '160px', cursor: 'pointer' }}
           >
             <FileText size={16} style={{ flexShrink: 0, color: 'var(--primary-light)' }} />
             <span>Ver Currículum</span>
-          </a>
+          </button>
         </div>
 
         {/* — Social links — */}

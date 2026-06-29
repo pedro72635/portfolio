@@ -11,7 +11,7 @@ const contactInfo = [
     label: 'Email',
     value: 'pedro.galera3031@gmail.com',
     href: 'mailto:pedro.galera3031@gmail.com',
-    color: '#7c3aed',
+    color: '#0d9488',
   },
   {
     icon: Phone,
@@ -80,7 +80,7 @@ const Contact = () => {
   };
 
   const focusStyle = (name) => focused === name
-    ? { borderColor: 'rgba(124,58,237,0.6)', boxShadow: '0 0 0 3px rgba(124,58,237,0.1)' }
+    ? { borderColor: 'rgba(13,148,136,0.6)', boxShadow: '0 0 0 3px rgba(13,148,136,0.1)' }
     : {};
 
   return (
@@ -90,7 +90,7 @@ const Contact = () => {
       {/* Ambient */}
       <div className="orb" style={{
         width: 500, height: 500,
-        background: 'radial-gradient(circle, rgba(124,58,237,0.14) 0%, transparent 70%)',
+        background: 'radial-gradient(circle, rgba(13,148,136,0.14) 0%, transparent 70%)',
         left: '50%', top: '50%',
         transform: 'translate(-50%, -50%)',
         filter: 'blur(90px)',
